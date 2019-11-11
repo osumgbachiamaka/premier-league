@@ -12,22 +12,22 @@ dotenv.config();
 mongoose.set('useCreateIndex', true);
 
 const uri = process.env.DBConnect;
-// mongoose.connect(uri, { useNewUrlParser: true })
-// .then(() => {
-//     console.log('Successfully connected')
-// })
-// .catch((err) => {
-//     console.log(`Couldn't connect ${err}`)
-// })
+mongoose.connect(uri, { useNewUrlParser: true })
+.then(() => {
+    console.log('Successfully connected')
+})
+.catch((err) => {
+    console.log(`Couldn't connect ${err}`)
+})
 
-//local db setup
-mongoose.connect("mongodb://localhost/league", { useNewUrlParser:true }, function(err){
-    if(err){
-        console.log("can't connet to database " + err)
-        return;
-    }
-    console.log("connection locally");
-}).catch()
+// //local db setup
+// mongoose.connect("mongodb://localhost/league", { useNewUrlParser:true }, function(err){
+//     if(err){
+//         console.log("can't connet to database " + err)
+//         return;
+//     }
+//     console.log("connection locally");
+// }).catch()
 
 
 app.use((req, res, next) => {
