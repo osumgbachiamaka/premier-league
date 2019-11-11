@@ -12,7 +12,7 @@ dotenv.config();
 mongoose.set('useCreateIndex', true);
 
 const uri = process.env.DBConnect;
-mongoose.connect(uri, { useNewUrlParser: true })
+mongoose.connect(uri, { useNewUrlParser: true})
 .then(() => {
     console.log('Successfully connected')
 })
