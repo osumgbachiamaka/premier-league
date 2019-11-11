@@ -1,17 +1,7 @@
 const Fixture = require('../models/fixture')
 
 exports.createFixture = (req, res) => {
-    const fixture = new Fixture({
-        teamOne : req.body.teamOne,
-        teamTwo : req.body.teamTwo,
-        date: req.body.date,
-        time: req.body.time,
-        location: req.body.location,
-        week: req.body.week,
-        point: req.body.point,
-        goals: req.body.goals,
-        gameState: req.body.gameState,
-    });
+    const fixture = new Fixture(req.body);
     fixture.save()
     .then(() => {
         res.status(201).json({
@@ -128,13 +118,15 @@ exports.completedFixture = (req, res) => {
 }
 
 exports.viewFixtureByTeam = (req, res) => {
-    Fixture.findOne({gameState: 'completed'})
+    const team = req.params.team;
+    Fixture.find({$or: [{teamOne: team}, {teamTwo: team}]})
     .then((fixture) => {
         res.status(200).json(fixture)
     })
     .catch((err) => {
+        console.log(err)
         res.status(400).json({
-            error: 'Error fetching completed fixture'
+            error: 'Error searching fixture by team'
         })
     })
 }

@@ -1,53 +1,9 @@
-const Admin = require('../models/admin');
+const Admin = require('../models/admin-auth');
 const Team = require('../models/teams')
-
-// exports.adminSignup = (req, res) => {
-//     const admin = new Admin({
-//         firstName : req.body.firstName,
-//         lastName: req.body.lastName,
-//         email: req.body.email,
-//         password: req.body.password,
-//         gender: req.body.gender,
-//         jobRole: req.body.jobRole,
-//         department: req.body.department,
-//         address: req.body.address,
-//     });
-//     admin.save()
-//     .then( () => {
-//         res.status(201).json({
-//         message: 'Admin created successfully!'
-//         });
-//     }).catch((error) => {
-//         res.status(400).json({
-//         error: 'error'
-//         });
-//     });
-// };
-// exports.adminLogin = (req, res) => {
-//     const email = req.body.email;
-//     const password = req.body.password;
-//     Admin.findOne({email: emailx, password: password})
-//     .then( () => {
-//         res.status(201).json({
-//         message: 'Admin login successfully!'
-//         });
-//     }).catch((error) => {
-//         res.status(400).json({
-//         error: 'error'
-//         });
-//     });
-// };
-
 
 
 exports.createTeam = (req, res) => {
-    const team = new Team({
-        teamName : req.body.teamName,
-        teamMembers: req.body.teamMembers,
-        teamNumber: req.body.teamNumber,
-        country: req.body.country,
-        teamCaptain: req.body.teamCaptain,
-    });
+    const team = new Team(req.body);
     team.save()
     .then(()=> {
         res.status(201).json({

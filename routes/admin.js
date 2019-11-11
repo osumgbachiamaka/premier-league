@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const adminCtrl = require('../controllers/admin')
+const adminSL = require('../controllers/admin-auth')
 
-// router.post('/admin/signup/v1', adminCtrl.adminSignup)
-
-// router.get('/admin/login/v1', adminCtrl.adminLogin)
+router.post('/admin/signup/v1', adminSL.adminCreate)
+router.post('/admin/login/v1', adminSL.adminLogin)
 
 router.post('/create/v1', adminCtrl.createTeam)
 router.delete('/:id/delete/v1', adminCtrl.deleteTeam)
