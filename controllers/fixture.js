@@ -74,13 +74,14 @@ exports.viewFixture = (req, res) => {
     })
     .catch((err) => {
         res.status(400).json({
-            error: 'Error fetching fixtures'
+            error: 'Error fetchin fixtures'
         })
     })
 }
 
 exports.viewOneFixture = (req, res) => {
     const id = req.params.id;
+    console.log(id)
     Fixture.findOne({_id : id})
     .then((fixture) => {
         res.status(200).json(fixture)

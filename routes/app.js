@@ -1,9 +1,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const adminRoute = require('./routes/admin')
-const fixtureRoute = require('./routes/fixture')
-const users = require('./routes/user-auth')
+const adminRoute = require('../routes/admin')
+const fixtureRoute = require('../routes/fixture')
+const users = require('../routes/user-auth')
+const adminSL = require('../controllers/admin-auth')
 const dotenv = require('dotenv');
 const app = express();
 
@@ -12,7 +13,7 @@ dotenv.config();
 mongoose.set('useCreateIndex', true);
 
 const uri = process.env.DBConnect;
-mongoose.connect(uri, { useNewUrlParser: true})
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true})
 .then(() => {
     console.log('Successfully connected')
 })
@@ -44,6 +45,9 @@ app.use((req, res, next) => {
     console.log('server started successfully')
     next()
 })
+
+app.post('/admin/signup/v1', adminSL.adminCreate)
+app.post('/admin/login/v1', adminSL.adminLogin)
 
 app.use('/api/team', adminRoute)
 app.use('/api/fixture', fixtureRoute)
